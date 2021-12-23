@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author gerencia
  */
-@WebServlet(name = "ViewsController", urlPatterns = {"/ViewsController"})
+@WebServlet(name = "ViewsController", urlPatterns = {"/Views/*"})
 public class ViewsController extends HttpServlet {
 
     /**
@@ -33,15 +33,31 @@ public class ViewsController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ViewsController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ViewsController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String action = request.getPathInfo();
+            
+            
+            switch (action) {
+                case "/contacts":
+                    response.sendRedirect("/views/contacts.jsp");
+                    break;
+                    
+                case "/login":
+                    response.sendRedirect("/views/login.jsp");
+                    break;
+                    
+                case "/recovery":
+                    response.sendRedirect("/views/recovery.jsp");
+                    break;
+                    
+                case "/registration":
+                    response.sendRedirect("/views/registration.jsp");
+                    break;
+                case "/404":
+                    //response.sendRedirect(".../index.jsp");
+                    break;
+                default:
+                    break;
+            }
         }
     }
 

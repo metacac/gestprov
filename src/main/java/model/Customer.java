@@ -4,24 +4,28 @@
  */
 package model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author gerencia
  */
 public class Customer {
-    
+    private int id;
+    private Timestamp date;
     private long cuit;
     private String email;
-    private String namesAll;
+    private String namesRepre;
     private long celular;
     private String password;
     
-    public Customer(long cuit, String email, String namesAll,  long celular, String password) {
+    public Customer(int id, Timestamp date, long cuit, String email, String namesRepre, long celular) {
+        this.id = id;
+        this.date = date;
         this.cuit = cuit;
         this.email = email;
-        this.namesAll = namesAll;
+        this.namesRepre = namesRepre;
         this.celular = celular;
-        this.password = password;
     }
     
     public Customer(String email, String password) {
@@ -29,6 +33,29 @@ public class Customer {
         this.password = password;
     }
 
+    public Customer(long cuit, String email, String namesRepre, long celular) {
+        this.cuit = cuit;
+        this.email = email;
+        this.namesRepre = namesRepre;
+        this.celular = celular;
+    }    
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Timestamp getDate() {
+        return date;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
+    }
+    
     public long getCuit() {
         return cuit;
     }
@@ -45,12 +72,12 @@ public class Customer {
         this.email = email;
     }
 
-    public String getNamesAll() {
-        return namesAll;
+    public String getNamesRepre() {
+        return namesRepre;
     }
 
-    public void setNamesAll(String namesAll) {
-        this.namesAll = namesAll;
+    public void setNamesRepre(String namesRepre) {
+        this.namesRepre = namesRepre;
     }
 
     public long getCelular() {

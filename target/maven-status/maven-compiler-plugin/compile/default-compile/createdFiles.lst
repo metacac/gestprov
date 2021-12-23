@@ -1,6 +1,10 @@
+database/AccountDAO.class
 controller/ViewsController.class
-model/SendMail.class
 database/CustomerDAO.class
-model/Customer.class
+model/Information.class
 controller/CustomerController.class
 config/DBConn.class
+model/Invoices.class
+controller/LoginController.class
+model/SendMail.class
+model/Customer.class

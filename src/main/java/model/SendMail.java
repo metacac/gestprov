@@ -19,7 +19,7 @@ import javax.mail.internet.MimeMessage;
  */
 public class SendMail {
     
-    public static String goSendMail(String toMail, String subject, String body) {
+    public String goSendMail(String toMail, String subject, String body) {
     final String fromMail = "";  //configurar usuario y clave segun el caso
     final String pass = ""; //configurar usuario y clave segun el caso
     
