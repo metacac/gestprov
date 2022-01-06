@@ -14,10 +14,11 @@ import java.util.List;
  * @author gerencia
  */
 public class Invoices {
-    private long idFromInvoice;
-    private long toInvoice;
-    private long operationNum;
-    private long invoiceNum;
+    private int idInvoice;
+    private String fromInvoice;
+    private String toInvoice;
+    private String operationNum;
+    private String invoiceNum;
     private long payTotal;
     private Timestamp dateIssue;
     private Timestamp dateExpire;
@@ -25,9 +26,11 @@ public class Invoices {
     private List<Invoices> custToInvoices;
     private List<Invoices> custFromInvoices;
     private String statusCal;
+    private String customer;
 
-    public Invoices(long idFromInvoice, long toInvoice, long operationNum, long invoiceNum, long payTotal, Timestamp dateIssue, Timestamp dateExpire, String statusInvoice, String statusCal) {
-        this.idFromInvoice = idFromInvoice;
+    public Invoices(int idInvoice, String fromInvoice, String toInvoice, String operationNum, String invoiceNum, long payTotal, Timestamp dateIssue, Timestamp dateExpire, String statusInvoice, String statusCal) {
+        this.idInvoice = idInvoice;
+        this.fromInvoice = fromInvoice;
         this.toInvoice = toInvoice;
         this.operationNum = operationNum;
         this.invoiceNum = invoiceNum;
@@ -39,7 +42,7 @@ public class Invoices {
         
         AccountDAO AccountDB = new AccountDAO();
         try {
-            this.custToInvoices = AccountDB.getToInvoices(idFromInvoice);
+            this.custToInvoices = AccountDB.getToInvoices(fromInvoice);
         } catch(SQLException e){
         }
         
@@ -49,8 +52,9 @@ public class Invoices {
         }
     }
     
-    public Invoices(long idFromInvoice, long toInvoice, long operationNum, long invoiceNum, long payTotal, Timestamp dateIssue, Timestamp dateExpire, String statusInvoice) {
-        this.idFromInvoice = idFromInvoice;
+    public Invoices(int idInvoice, String fromInvoice, String toInvoice, String operationNum, String invoiceNum, long payTotal, Timestamp dateIssue, Timestamp dateExpire, String statusInvoice) {
+        this.idInvoice = idInvoice;
+        this.fromInvoice = fromInvoice;
         this.toInvoice = toInvoice;
         this.operationNum = operationNum;
         this.invoiceNum = invoiceNum;
@@ -60,45 +64,53 @@ public class Invoices {
         this.statusInvoice = statusInvoice;
     }
 
-    public Invoices(long toInvoice, long operationNum, long invoiceNum, long payTotal, Timestamp dateIssue, Timestamp dateExpire, String statusInvoice) {
-        this.toInvoice = toInvoice;
+    public Invoices(int idInvoice, String customer, String operationNum, String invoiceNum, long payTotal, Timestamp dateExpire, String statusInvoice) {
+        this.idInvoice = idInvoice;
+        this.customer = customer;
         this.operationNum = operationNum;
         this.invoiceNum = invoiceNum;
         this.payTotal = payTotal;
-        this.dateIssue = dateIssue;
         this.dateExpire = dateExpire;
         this.statusInvoice = statusInvoice;
     }
-
-    public long getIdFromInvoice() {
-        return idFromInvoice;
+    
+    public int getIdInvoice() {
+        return idInvoice;
     }
 
-    public void setIdFromInvoice(long idFromInvoice) {
-        this.idFromInvoice = idFromInvoice;
+    public void setIdInvoice(int idInvoice) {
+        this.idInvoice = idInvoice;
     }
 
-    public long getToInvoice() {
+    public String getFromInvoice() {
+        return fromInvoice;
+    }
+
+    public void setFromInvoice(String fromInvoice) {
+        this.fromInvoice = fromInvoice;
+    }
+
+    public String getToInvoice() {
         return toInvoice;
     }
 
-    public void setToInvoice(long toInvoice) {
+    public void setToInvoice(String toInvoice) {
         this.toInvoice = toInvoice;
     }
 
-    public long getOperationNum() {
+    public String getOperationNum() {
         return operationNum;
     }
 
-    public void setOperationNum(long operationNum) {
+    public void setOperationNum(String operationNum) {
         this.operationNum = operationNum;
     }
 
-    public long getInvoiceNum() {
+    public String getInvoiceNum() {
         return invoiceNum;
     }
 
-    public void setInvoiceNum(long invoiceNum) {
+    public void setInvoiceNum(String invoiceNum) {
         this.invoiceNum = invoiceNum;
     }
 
@@ -141,5 +153,12 @@ public class Invoices {
     public void setStatusCal(String statusCal) {
         this.statusCal = statusCal;
     }
-    
+
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
 }

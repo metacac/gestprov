@@ -20,9 +20,8 @@ import javax.mail.internet.MimeMessage;
 public class SendMail {
     
     public String goSendMail(String toMail, String subject, String body) {
-    final String fromMail = "";  //configurar usuario y clave segun el caso
-    final String pass = ""; //configurar usuario y clave segun el caso
-    
+    final String fromMail = "xxxxxxxx@xxxxxxx";  //configurar usuario y clave segun el caso SendMail.java
+    final String pass = "xxxxxxxx"; //configurar usuario y clave segun el caso SendMail.java    
     Properties props = new Properties();
 
     props.put ("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google

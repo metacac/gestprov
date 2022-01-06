@@ -9,10 +9,11 @@ package model;
  * @author gerencia
  */
 public class Information {
-    private long idCustomer;
+    private int idCustomer;
+    private String cuitInf;
     private String namesCust;
     private String companyName;
-    private long phone;
+    private String phone;
     private String direction;
     private String postalCode;
     private String city;
@@ -20,8 +21,9 @@ public class Information {
     private String statusCustomer;
     private String typeCust;
 
-    public Information(long idCustomer, String namesCust, String companyName, long phone, String direction, String postalCode, String city, String country, String statusCustomer, String typeCust) {
+    public Information(int idCustomer, String cuitInf, String namesCust, String companyName, String phone, String direction, String postalCode, String city, String country, String statusCustomer, String typeCust) {
         this.idCustomer = idCustomer;
+        this.cuitInf = cuitInf;
         this.namesCust = namesCust;
         this.companyName = companyName;
         this.phone = phone;
@@ -33,12 +35,20 @@ public class Information {
         this.typeCust = typeCust;
     }
 
-    public long getIdCustomer() {
+    public int getIdCustomer() {
         return idCustomer;
     }
 
-    public void setIdCustomer(long idCustomer) {
+    public void setIdCustomer(int idCustomer) {
         this.idCustomer = idCustomer;
+    }
+
+    public String getCuitInf() {
+        return cuitInf;
+    }
+
+    public void setCuitInf(String cuitInf) {
+        this.cuitInf = cuitInf;
     }
 
     public String getNamesCust() {
@@ -57,11 +67,11 @@ public class Information {
         this.companyName = companyName;
     }
 
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

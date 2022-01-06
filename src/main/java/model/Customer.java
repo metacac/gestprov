@@ -13,16 +13,16 @@ import java.sql.Timestamp;
 public class Customer {
     private int id;
     private Timestamp date;
-    private long cuit;
+    private String cuitCus;
     private String email;
     private String namesRepre;
-    private long celular;
+    private String celular;
     private String password;
     
-    public Customer(int id, Timestamp date, long cuit, String email, String namesRepre, long celular) {
+    public Customer(int id, Timestamp date, String cuitCus, String email, String namesRepre, String celular) {
         this.id = id;
         this.date = date;
-        this.cuit = cuit;
+        this.cuitCus = cuitCus;
         this.email = email;
         this.namesRepre = namesRepre;
         this.celular = celular;
@@ -33,8 +33,8 @@ public class Customer {
         this.password = password;
     }
 
-    public Customer(long cuit, String email, String namesRepre, long celular) {
-        this.cuit = cuit;
+    public Customer(String cuitCus, String email, String namesRepre, String celular) {
+        this.cuitCus = cuitCus;
         this.email = email;
         this.namesRepre = namesRepre;
         this.celular = celular;
@@ -56,12 +56,12 @@ public class Customer {
         this.date = date;
     }
     
-    public long getCuit() {
-        return cuit;
+    public String getCuitCus() {
+        return cuitCus;
     }
 
-    public void setCuit(long cuit) {
-        this.cuit = cuit;
+    public void setCuitCus(String cuitCus) {
+        this.cuitCus = cuitCus;
     }
 
     public String getEmail() {
@@ -80,11 +80,11 @@ public class Customer {
         this.namesRepre = namesRepre;
     }
 
-    public long getCelular() {
+    public String getCelular() {
         return celular;
     }
 
-    public void setCelular(long celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
     }
 
