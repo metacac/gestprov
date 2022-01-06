@@ -2,6 +2,7 @@
     Document   : custinformation
     Created on : 14 dic. 2021, 09:00:28
     Author     : gerencia
+<%= cuitNum %>,  <%= phone %>, <%= direction %>,<%= postalCode %>, <%= city %>, <%= country %>, <%= typeCust %>
 --%>
 
 <%@page import="database.AccountDAO"%>
@@ -33,16 +34,45 @@
                 Customer customer = (Customer) session.getAttribute("customer");
                 Information information = AccountDB.getInformationByEmail(customer.getEmail());
                 session.setAttribute("information",information);
-            %>  
+                boolean isMessRegisteredOk = (boolean) session.getAttribute("isMessRegisteredOk");
+    
+                if (isMessRegisteredOk){
+                    String cuit = (String) session.getAttribute("cuit");
+                    String phone = (String) session.getAttribute("phone");
+                    String direction = (String) session.getAttribute("direction");
+                    String postalCode = (String) session.getAttribute("postalCode");
+                    String city = (String) session.getAttribute("city");
+                    String country = (String) session.getAttribute("country");
+                    String typeCust = (String) session.getAttribute("typeCust");
+%>
+        <div class="container">
+            <div class="alert alert-success alert-dimissible fade show d-flex justify-content-between" role="alert">
+                <div><svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </symbol></svg>
+                    Ha sido realizado con éxito el registro.</br>
+                    <!--En unos segundos será redirigido a la pantalla inicio.-->
+                    <%= cuit %>,  <%= phone %>, <%= direction %>,<%= postalCode %>, <%= city %>, <%= country %>, <%= typeCust %>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+            <script>
+                //setTimeout( () => window.location.href= "/login/custInformation.jsp",3000);
+            </script>
+<%
+    session.setAttribute("isMessRegisteredOk",false);}
+%>
             <section class="row">
                 <div class="col">
                     <p>Cuit de la empresa</p>
-                    <input type="number" name="cuit" class="form-control" placeholder="<% out.print(customer.getCuit()); %>" aria-label="Cuit del cliente" id="cuit" disabled/>
+                    <input type="number" name="cuit" class="form-control-plaintext" placeholder="<%= customer.getCuitCus() %>" aria-label="Cuit del cliente" id="cuit" disabled/>
                     <span class="error" aria-live="polite" style="color: red"></span>
                 </div>
                 <div class="col">
                     <p>Nombre Fiscal de la empresa</p>
-                    <input type="text" name="companyName" class="form-control" placeholder="<% out.print(information.getCompanyName()); %>" aria-label="Nombre fiscal de la empresa" id="companyName" disabled/>
+                    <input type="text" name="companyName" class="form-control-plaintext" placeholder="<%= information.getCompanyName() %>" aria-label="Nombre fiscal de la empresa" id="companyName" disabled/>
                     <span class="error" aria-live="polite" style= "color: red"></span>
                 </div>
             </section>
@@ -50,29 +80,29 @@
             <section class="row">
                 <div class="col">
                     <p>País</p>
-                    <input type="text" name="country" class="form-control" placeholder="<% out.print(information.getCountry()); %>" aria-label="País" id="country" disabled/>
+                    <input type="text" name="country" class="form-control-plaintext" placeholder="<%= information.getCountry() %>" aria-label="País" id="country" disabled/>
                     <span class="error" aria-live="polite" style= "color: red"></span>
                 </div>
                 <div class="col">
                     <p>Ciudad</p>
-                    <input type="text" name="city" class="form-control" placeholder="<% out.print(information.getCity()); %>" aria-label="Ciudad" id="city" disabled/>
+                    <input type="text" name="city" class="form-control-plaintext" placeholder="<%= information.getCity() %>" aria-label="Ciudad" id="city" disabled/>
                     <span class="error" aria-live="polite" style= "color: red"></span>
                 </div>
                 <div class="col">
                     <p>Dirección</p>
-                    <input type="text" name="direction" class="form-control" placeholder="<% out.print(information.getDirection()); %>" aria-label="Dirección" id="direction" disabled/>
+                    <input type="text" name="direction" class="form-control-plaintext" placeholder="<%= information.getDirection() %>" aria-label="Dirección" id="direction" disabled/>
                     <span class="error" aria-live="polite" style= "color: red"></span>
                 </div>
             </section>
             <section class="row">
                 <div class="col">
                     <p>Teléfono de la empresa</p>
-                    <input type="number" name="phone" class="form-control" placeholder="<% out.print(information.getPhone()); %>" aria-label="Télefono de contacto en la empresa" id="phone" disabled/>
+                    <input type="number" name="phone" class="form-control-plaintext" placeholder="<%= information.getPhone() %>" aria-label="Télefono de contacto en la empresa" id="phone" disabled/>
                     <span class="error" aria-live="polite" style= "color: red"></span>
                 </div>
                 <div class="col">
                     <p>Código Postal</p>
-                    <input type="number" name="postalCode" class="form-control" placeholder="<% out.print(information.getPostalCode()); %>" aria-label="Código Postal" id="postalCode" disabled/>
+                    <input type="number" name="postalCode" class="form-control-plaintext" placeholder="<%= information.getPostalCode() %>" aria-label="Código Postal" id="postalCode" disabled/>
                     <span class="error" aria-live="polite" style="color: red"></span>
                 </div>
             </section>
@@ -80,24 +110,24 @@
             <section class="row">
                 <div class="col">
                     <p>Nombre de usario de la empresa</p>
-                    <input type="text" name="namesCust" class="form-control" placeholder="<% out.print(information.getNamesCust()); %>" aria-label="Nombre de usario de la empresa" id="namesCust" disabled/>
+                    <input type="text" name="namesCust" class="form-control-plaintext" placeholder="<%= information.getNamesCust() %>" aria-label="Nombre de usario de la empresa" id="namesCust" disabled/>
                     <span class="error" aria-live="polite" style= "color: red"></span>
                 </div>
                 <div class="col">
                     <p>Correo de la persona contacto</p>
-                    <input type="email" name="email" class="form-control" placeholder="<% out.print(customer.getEmail()); %>" aria-label="Correo electrónico" id="email" disabled/>
+                    <input type="email" name="email" class="form-control-plaintext" placeholder="<%= customer.getEmail() %>" aria-label="Correo electrónico" id="email" disabled/>
                     <span class="error" aria-live="polite" style= "color: red"></span>
                 </div>
             </section>
             <section class="row">
                 <div class="col" id="container2a">
                     <p>Apellidos y Nombres la persona contacto</p>
-                    <input type="text" name="namesRepre" class="form-control" placeholder="<% out.print(customer.getNamesRepre()); %>" aria-label="Apellidos y Nombres" id="namesRepre" disabled/>
+                    <input type="text" name="namesRepre" class="form-control-plaintext" placeholder="<%= customer.getNamesRepre() %>" aria-label="Apellidos y Nombres" id="namesRepre" disabled/>
                     <span class="error" aria-live="polite" style= "color: red"></span>
                 </div>
                 <div class="col">
                     <p>Telefóno móvil de la persona contacto</p>
-                    <input type="number" name="celular" class="form-control" placeholder="<% out.print(customer.getCelular()); %>" aria-label="celular" id="celular" disabled/>
+                    <input type="number" name="celular" class="form-control-plaintext" placeholder="<%= customer.getCelular() %>" aria-label="celular" id="celular" disabled/>
                     <span class="error" aria-live="polite" style="color: red"></span>
                 </div>
             </section>
@@ -108,7 +138,7 @@
                 <div class="col">
                 </div>
                 <div class="col">
-                    <input type="text" name="typeCust" class="form-control" placeholder="<% out.print(information.getTypeCust()); %>" aria-label="Tipo de servicio que desea recibir o prestar" id="typeCust" disabled/>
+                    <input type="text" name="typeCust" class="form-control-plaintext" placeholder="<%= information.getTypeCust() %>" aria-label="Tipo de servicio que desea recibir o prestar" id="typeCust" disabled/>
                     <span class="error" aria-live="polite" style="color: red"></span>
                 </div>
                 <div class="col">

@@ -22,10 +22,11 @@
             session.setAttribute("information",information);
 %> 
     <h1 class="m-5 text-success" >Acceso garantizado</h1>
-    <h2 class="text-dark">Bienvenido <% out.print(information.getNamesCust()); %> al sistema</h2>
+    <h2 class="text-dark">Bienvenido <%= information.getNamesCust() %> al sistema</h2>
     <p>Será redirigido a su zona de usuario</p>
+    
     <script>
-      setTimeout( () => window.location.href= "/Login/zone",1500);  
+      setTimeout( () => window.location.href= "/Login/zone",1200);  
     </script>
     <p>Si desea puede</p>
     <a href="/Login/logout" class="text-primary"> Salir</a>
@@ -35,13 +36,12 @@
     
     <h1 class="m-5 text-danger" >Debes estar logeado para acceder a esta página</h1>
     <script>
-      //setTimeout( () => window.location.href= "/Views/login",1500);  
+      setTimeout( () => window.location.href= "/Views/login",2100);
     </script>
     <a href="/Views/login" class="text-primary"> Volver al login</a>
     
 <%
     }
 %>
-    
 </main>
 <%@include file="/WEB-INF/facelets/templates/partialApp/footerApp.jsp" %>

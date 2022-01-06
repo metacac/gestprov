@@ -153,10 +153,56 @@ function muestreErrorCorreo() {
         CORREOERROR.textContent = 'El valor introducido debe ser una dirección de Correo Electrónico (puede faltar el @ y la longitud miníma de 8 carácteres).';
         color('correo','pink');
     } else if(CORREO.validity.tooShort) {
-        CORREOERROR.textContent = `El correo electrónico debe tener al menos ${CORREO.minLength} carácteres; ha introducido ${ CORREO.value.length }.`;
+        CORREOERROR.textContent = `El correo electrónico debe tener al menos ${minLength} carácteres; ha introducido ${ CORREO.value.length }.`;
         color('correo','pink');
     }
     CORREOERROR.className = 'error activo';
 };
 
 
+/*este es el codigo
+
+   
+        const PASSWORD  = document.getElementById('password');
+        const PASSWORDREPETIDA  = document.getElementById('passwordRepetida');
+        const PASSWORDERROR = document.getElementById('passwordC');
+        const BOTONENVIAR= document.getElementById('enviar');
+             
+        //EVENTO AL HACER CLICK EN RESUMEN CON FUNCION EJECUTABLE Y LLAMADA PARA VALIDAR EL ENVIO DEL FORM
+        BOTONENVIAR.addEventListener('click', function (event) {
+            if(!passwordValidate(event)){
+                PASSWORDERROR.innerHTML = '';
+                document.regristro.submit();
+            };
+        });
+        //FUNCIONES CON EVENTO CON FUNCION EJECUTABLE AL CAMBIAR EL PASSWORD
+        function passwordValidate(event){
+//            PASSWORD.addEventListener('change', function (event) {
+//                PASSWORDREPETIDA.addEventListener('change', function (event) {
+                    if (PASSWORD.validity.valid && PASSWORD.value === PASSWORDREPETIDA.value && PASSWORD !== null) {
+                        PASSWORDERROR.innerHTML = '';
+                        PASSWORDERROR.className = 'error';
+                        return false;
+                    } else {
+                        muestreErrorPassword();
+                    return true;
+                    }
+//                });
+//            });
+        }
+
+        //FUNCION LLAMADA PARA VALIDAR EL PASSWORD
+        function muestreErrorPassword() {
+            if(!(PASSWORD.value === PASSWORDREPETIDA.value)) {
+                PASSWORDERROR.textContent = 'El Password debe ser correctamente repetido.';
+                //color('password',FFC0B);
+            } else if(PASSWORD.valueMissing) {
+                PASSWORDERROR.textContent = 'El Password no puede ser nulo.';
+                //color('password','pink');
+            } else if(PASSWORD.validity.tooShort) {
+                PASSWORDERROR.textContent = `El Password debe tener al menos 8 carácteres.`;
+                //color('password','pink');
+            }
+            PASSWORDERROR.className = 'error activo';
+        };
+    */

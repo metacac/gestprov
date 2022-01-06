@@ -14,7 +14,7 @@
         <footer class="flex-wrap justify-content-around py-2 mb-2 border-bottom"> 
             <nav class="navbar navbar-expand-lg navbar-dark">
                 <div class="container">
-                    <a href="/login/custInfor" class="nav-link"><span class="fs-4"> Bienvenido <% out.print(information.getNamesCust()); %> </span></a>
+                    <a href="/Login/custNewInfor" class="nav-link"><span class="fs-4"> Bienvenido <%= information.getNamesCust() %> </span></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -41,10 +41,16 @@
             </nav>
         </footer>
         <hr/>     
-            <p class="text-center text-muted">Todos los derechos reservados &#169; by {nuestro equipo}</p>
+            <p class="text-center text-muted">Todos los derechos reservados &#169; by metacodo</p>
         <hr/>  
         <!-- fin de contenedor pie de pagina -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="../public/modalEdit.js"></script>
+        <script type="text/javascript" src="../public/modalDelete.js"></script>
+        <script type="text/javascript" src="../public/modalStatus.js"></script>
+        <script type="text/javascript" src="../public/modalDialog.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
+        
 <!--        <script src="public/main.js"></script>    -->
         
     </body>

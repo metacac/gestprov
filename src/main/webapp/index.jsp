@@ -12,7 +12,6 @@
     if (session.isNew()){
         session.setAttribute("isLogin",false);
         session.setAttribute("isMessLogout",false);
-        session.setAttribute("isLogin",false);
         session.setAttribute("isMesslocked", false);
         session.setAttribute("isMessRejected", false);
         session.setAttribute("isMessRegistered", false);
@@ -20,6 +19,7 @@
         session.setAttribute("isMessRecovered", false);
         session.setAttribute("isMessNoRecovered", false);
         session.setAttribute("isMessWithoutLogin", false);
+        session.setAttribute("isMessNoRepeteadPass", false);
         session.setAttribute("attempts", 0);
     }
     

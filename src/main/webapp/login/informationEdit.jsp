@@ -24,17 +24,18 @@
             if (isLogged) {
                 Customer customer = (Customer) session.getAttribute("customer");
                 Information information = (Information) session.getAttribute("information");
-                
+                session.setAttribute("cuit",customer.getCuitCus());
             %>  
             <section class="row">
                 <div class="col">
                     <p>Cuit de la empresa</p>
-                    <input type="text" name="cuit" class="form-control" style="color:gray" value="<% out.print(customer.getCuit()); %>" aria-label="Cuit del cliente" id="cuit" disabled/>
+                    <input type="text" name="cuitViews" class="form-control-plaintext" placeholder="<% out.print(customer.getCuitCus()); %>" aria-label="Cuit del cliente Vista" id="cuitViews" disabled/>
+                    <input type="hidden" name="cuit" class="form-control"  value="<% out.print(customer.getCuitCus()); %>" id="cuit"/>
                     <span class="error" aria-live="polite" style="color: red"></span>
                 </div>
                 <div class="col">
                     <p>Nombre Fiscal de la empresa</p>
-                    <input type="text" name="companyName" class="form-control" placeholder="<% out.print(information.getCompanyName()); %>" aria-label="Nombre fiscal de la empresa" id="company_name" disabled/>
+                    <input type="text" name="companyName" class="form-control-plaintext" placeholder="<% out.print(information.getCompanyName()); %>" aria-label="Nombre fiscal de la empresa" id="companyName" disabled/>
                     <span class="error" aria-live="polite" style= "color: red"></span>
                 </div>
             </section>
@@ -64,7 +65,7 @@
                 </div>
                 <div class="col">
                     <p>Código Postal</p>
-                    <input type="text" name="postalCode" class="form-control" value="<% out.print(information.getPostalCode()); %>" aria-label="Código Postal" id="postal_code"/>
+                    <input type="text" name="postalCode" class="form-control" value="<% out.print(information.getPostalCode()); %>" aria-label="Código Postal" id="postalCode"/>
                     <span class="error" aria-live="polite" style="color: red"></span>
                 </div>
             </section>
@@ -72,24 +73,24 @@
             <section class="row">
                 <div class="col">
                     <p>Nombre de usario de la empresa</p>
-                    <input type="text" name="namesCust" class="form-control" placeholder="<% out.print(information.getNamesCust()); %>" aria-label="Nombre de usario de la empresa" id="names_cust" disabled/>
+                    <input type="text" name="namesCust" class="form-control-plaintext" placeholder="<%= information.getNamesCust() %>" aria-label="Nombre de usario de la empresa" id="namesCust" disabled/>
                     <span class="error" aria-live="polite" style= "color: red"></span>
                 </div>
                 <div class="col">
                     <p>Correo de la persona contacto</p>
-                    <input type="email" name="email" class="form-control" placeholder="<% out.print(customer.getEmail()); %>" aria-label="Correo electrónico" id="email" disabled/>
+                    <input type="email" name="email" class="form-control-plaintext" placeholder="<%= customer.getEmail() %>" aria-label="Correo electrónico" id="email" disabled/>
                     <span class="error" aria-live="polite" style= "color: red"></span>
                 </div>
             </section>
             <section class="row">
                 <div class="col" id="container2a">
                     <p>Apellidos y Nombres la persona contacto</p>
-                    <input type="text" name="namesRepre" class="form-control" placeholder="<% out.print(customer.getNamesRepre()); %>" aria-label="Apellidos y Nombres" id="names_repre" disabled/>
+                    <input type="text" name="namesRepre" class="form-control-plaintext" placeholder="<%= customer.getNamesRepre() %>" aria-label="Apellidos y Nombres" id="namesRepre" disabled/>
                     <span class="error" aria-live="polite" style= "color: red"></span>
                 </div>
                 <div class="col">
                     <p>Telefóno móvil de la persona contacto</p>
-                    <input type="number" name="celular" class="form-control" placeholder="<% out.print(customer.getCelular()); %>" aria-label="celular" id="celular" disabled/>
+                    <input type="number" name="celular" class="form-control-plaintext" placeholder="<%= customer.getCelular() %>" aria-label="celular" id="celular" disabled/>
                     <span class="error" aria-live="polite" style="color: red"></span>
                 </div>
                 
@@ -101,7 +102,7 @@
                 <div class="col">
                 </div>
                 <div class="col">
-                    <input type="text" name="typeCust" class="form-control" value="<% out.print(information.getTypeCust()); %>" aria-label="Tipo de servicio que desea recibir o prestar" id="type_cust"/>
+                    <input type="text" name="typeCust" class="form-control" value="<% out.print(information.getTypeCust()); %>" aria-label="Tipo de servicio que desea recibir o prestar" id="typeCust"/>
                     <span class="error" aria-live="polite" style="color: red"></span>
                 </div>
                 <div class="col">

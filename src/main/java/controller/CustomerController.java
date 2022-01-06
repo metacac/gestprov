@@ -82,8 +82,8 @@ public class CustomerController extends HttpServlet {
                             response.sendRedirect("/Views/login");
                         } else {
                             Customer customer = CustomerDB.getCustomerByEmail(email);
-                            long cuit = customer.getCuit();
-                            String locked = CustomerDB.locked(cuit);
+                            String cuit = customer.getCuitCus();
+                            CustomerDB.locked(cuit);
                             session.setAttribute("isMesslocked", true);
                             response.sendRedirect("/Views/login");
                         }
@@ -93,20 +93,28 @@ public class CustomerController extends HttpServlet {
                 case "/register":
                     email = request.getParameter("email");
                     pass = request.getParameter("password");
+                    String rePass = request.getParameter("passwordRepetido");
                     String namesRepre = request.getParameter("namesRepre");
-                    long celularNum = Long.parseLong(request.getParameter("celular"));
-                    long cuitNum = Long.parseLong(request.getParameter("cuit"));
-
-                    boolean duplicate = CustomerDB.duplicateCuit(cuitNum);
+                    String celular = request.getParameter("celular");
+                    String cuit = request.getParameter("cuit");
+                    
+                    boolean repeated = CustomerDB.repeated(pass, rePass);
+                    boolean duplicate = CustomerDB.duplicateCuit(cuit);
+                    
+                    if (!repeated) {
+                        session.setAttribute("isMessNoRepeteadPass", true);
+                        response.sendRedirect("/Views/registration");
+                        break;
+                    }
                     
                     if (!duplicate) {
-                        Timestamp dateCre = CustomerDB.createCustomer(cuitNum, email, namesRepre, celularNum, pass);
+                        Timestamp dateCre = CustomerDB.createCustomer(cuit, email, namesRepre, celular, pass);
                         
                         String subject = "Registro realizado...";
                         String body = "Hola, "+namesRepre +". Ante todo recibe un cordial saludo, y de nuestra parte\n"
                         + "el agradecimiento por la confianza en nuestro sistema de gestion de proveedores.\n\n"
                         + "Para concluir los tramites para la empresa cuyo cuit es\n"
-                        + "el siguiente "+cuitNum+ " realizados en la fecha "+ dateCre+".\n\n"
+                        + "el siguiente "+cuit+ " realizados en la fecha "+ dateCre+".\n\n"
                         + "Por favor confirma la cuenta de correo electrónico, para ello\n "
                         + "agradecemos hacer clic en el siguiente link (Insertar link)\n\n"
                         + "Sin otro particular a que hacer referencia, sintiendos honrados de habernos elegido.\n"
@@ -129,9 +137,9 @@ public class CustomerController extends HttpServlet {
                     
                 case "/recover":
                     email = request.getParameter("email");
-                    cuitNum = Long.parseLong(request.getParameter("cuit"));
+                    cuit = request.getParameter("cuit");
                     
-                    boolean validate = CustomerDB.validate(cuitNum, email);
+                    boolean validate = CustomerDB.validate(cuit, email);
                     
                     if (validate) {
                         long datetime = System.currentTimeMillis();
@@ -141,7 +149,7 @@ public class CustomerController extends HttpServlet {
                         String subject = "Registro validado...";
                         String body = "Hola, "+customer.getNamesRepre() +". Ante todo recibe un cordial saludo.\n"
                         + "Damos, nuevamente, la bienvenida a nuestro sistema a usted y a la\n"
-                        + "empresa cuyo cuit es "+cuitNum+ " cuya representación ejerce."
+                        + "empresa cuyo cuit es "+cuit+ " cuya representación ejerce."
                         + "Si usted no ha realizado este procedimiento, ignore este correo.\n\n"
                         + "El procedimiento de recuperación de la cuenta fue\n"
                         + "realizado en la fecha siquiente "+ timestamp+".\n"

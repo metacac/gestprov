@@ -26,7 +26,7 @@ public class CustomerDAO {
     
     public CustomerDAO() {
         DBConn conn = new DBConn();
-        connec = conn.getConnection("","",""); //configurar usuario y clave segun el caso
+        connec = conn.getConnection("xxxxxxx", "xxxx", "xxxxxx"); //configurar usuario y clave segun el caso
     }
     
     public Customer getCustomerByEmail(String email) throws SQLException{
@@ -37,7 +37,7 @@ public class CustomerDAO {
         rs = ps.executeQuery();
         
         while (rs.next()) {            
-            customer = new Customer(rs.getLong("cuit"), email, rs.getString("namesRepre"), rs.getLong("celular"));
+            customer = new Customer(rs.getString("cuitCus"), email, rs.getString("namesRepre"), rs.getString("celular"));
         }
         
         rs.close();
@@ -50,8 +50,8 @@ public class CustomerDAO {
         Boolean respuesta = false;
         String sql = "SELECT statusCustomer FROM information "
                    + "LEFT JOIN customer "
-                   + "ON  idCustomer = cuit "
-                   + "WHERE email = ?"; 
+                   + "ON  cuitInf = cuitCus "
+                   + "WHERE email = ?";
         ps = connec.prepareStatement(sql);
         ps.setString(1, email);
         rs = ps.executeQuery();
@@ -88,10 +88,10 @@ public class CustomerDAO {
         return false;
     }
         
-    public boolean duplicateCuit(long cuit) throws SQLException {
-        String sql = "SELECT cuit FROM customer WHERE cuit = ?";
+    public boolean duplicateCuit(String cuit) throws SQLException {
+        String sql = "SELECT cuitCus FROM customer WHERE cuitCus = ?";
         ps = connec.prepareStatement(sql);
-        ps.setLong(1, cuit);
+        ps.setString(1, cuit);
         rs = ps.executeQuery();
         
          if (rs.next()){
@@ -106,10 +106,10 @@ public class CustomerDAO {
         return false;
     }
     
-    public boolean validate(long cuit, String email) throws SQLException {
-        String sql = "SELECT cuit, email FROM customer WHERE cuit = ? AND email = ?";
+    public boolean validate(String cuit, String email) throws SQLException {
+        String sql = "SELECT cuitCus, email FROM customer WHERE cuitCus = ? AND email = ?";
         ps = connec.prepareStatement(sql);
-        ps.setLong(1, cuit);
+        ps.setString(1, cuit);
         ps.setString(2,email);
         rs = ps.executeQuery();
         
@@ -125,15 +125,15 @@ public class CustomerDAO {
         return false;
     }
     
-    public Timestamp createCustomer(long cuit, String email, String namesRepre, long celular, String password) throws SQLException{
+    public Timestamp createCustomer(String cuit, String email, String namesRepre, String celular, String password) throws SQLException{
         Long datetime = System.currentTimeMillis();
         Timestamp dateCre = new Timestamp(datetime); 
-        String sql = "INSERT INTO customer (cuit, email, namesRepre, celular, password) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO customer (cuitCus, email, namesRepre, celular, password) VALUES (?,?,?,?,?)";
         ps = connec.prepareStatement(sql, RETURN_GENERATED_KEYS);
-        ps.setLong(1,cuit);
+        ps.setString(1,cuit);
         ps.setString(2, email);
         ps.setString(3, namesRepre);
-        ps.setLong(4,celular);
+        ps.setString(4,celular);
         ps.setString(5, password);
         ps.executeUpdate();
         
@@ -147,16 +147,24 @@ public class CustomerDAO {
         return dateCre;
     }
     
-    public String locked(long cuit) throws SQLException {
+    public String locked(String cuit) throws SQLException {
         String sql = "UPDATE information SET statusCustomer = 'Bloqueado'"
-                   + "WHERE idCustomer = ?"; 
+                   + "WHERE cuitCus = ?"; 
         ps = connec.prepareStatement(sql);
-        ps.setLong(1, cuit);
+        ps.setString(1, cuit);
         ps.executeUpdate();
         
         rs.close();
         ps.close();
         //connec.close();
         return "Usuario bloqueado";
+    }
+    
+    public Boolean repeated(String password, String passwordRepetido) {
+        if (password.equals(passwordRepetido)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
